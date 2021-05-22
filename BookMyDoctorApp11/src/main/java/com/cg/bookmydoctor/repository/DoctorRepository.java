@@ -13,10 +13,10 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer>{
 	
 	
 	@Transactional(timeout = 10)
-	List<Doctor> findBySpeciality(String speciality);
+	List<Doctor> getById(String speciality);
 	
 	@Transactional(timeout = 10)
-	Doctor getDr(Doctor dr);
+	Doctor getDoctor(Doctor dr);
 	
 	@Transactional(timeout = 10)
 	List<Doctor> findAll();
@@ -25,7 +25,11 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer>{
 	<S extends Doctor> S save(Doctor dr);
 	
 	@Transactional
-	<S extends AvailabilityDates> S saveDates(AvailabilityDates ad);
+	<S extends AvailabilityDates> S saveDate(AvailabilityDates ad);
 	
 	void delete(Doctor dr);
+
+		
+
+	//void save(AvailabilityDates bean);
 }

@@ -13,7 +13,7 @@ public interface FeedBackRepository extends JpaRepository<FeedBack, Integer>{
 	
 	
 	@Transactional(timeout = 10)
-	FeedBack getFeedback(FeedBack dr);
+	FeedBack getOne(FeedBack dr);
 	
 	@Transactional(timeout = 10)
 	List<FeedBack> findAll();

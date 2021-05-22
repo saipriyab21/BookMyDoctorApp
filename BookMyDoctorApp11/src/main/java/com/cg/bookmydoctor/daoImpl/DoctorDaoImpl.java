@@ -25,7 +25,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 	public List<Doctor> getDoctorList(String speciality) {
 
 		try {
-			return docrep.findBySpeciality(speciality);
+			return docrep.getById(speciality);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -58,7 +58,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 
 	public Doctor getDoctor(Doctor doc) {
 		try {
-			return docrep.getDr(doc);
+			return docrep.getDoctor(doc);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -68,7 +68,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 	public Doctor updateDoctorProfile(Doctor bean) {
 		try {
 			docrep.save(bean);
-			return docrep.getDr(bean);
+			return docrep.getDoctor(bean);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -78,7 +78,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 	public Doctor addDoctor(Doctor dr) {
 		try {
 			docrep.save(dr);
-			return docrep.getDr(dr);
+			return docrep.getDoctor(dr);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -88,7 +88,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 	public boolean addAvailability(AvailabilityDates bean) {
 		//Date d1, d2;
 		try {
-			docrep.saveDates(bean);
+			docrep.saveDate(bean);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public abstract class DoctorDaoImpl implements IDoctorDao{
 	
 	public boolean updateAvailability(AvailabilityDates bean) {
 		try {
-			docrep.saveDates(bean);
+			docrep.saveDate(bean);
 			return true;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

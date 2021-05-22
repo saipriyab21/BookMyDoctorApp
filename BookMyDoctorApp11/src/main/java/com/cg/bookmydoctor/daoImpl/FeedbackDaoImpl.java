@@ -26,7 +26,7 @@ public class FeedbackDaoImpl implements IFeedbackDao {
 		
 		try {
 			fbrep.save(fdb);
-			return fbrep.getFeedback(fdb);
+			return fbrep.getOne(fdb);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -37,7 +37,7 @@ public class FeedbackDaoImpl implements IFeedbackDao {
 	public FeedBack getFeedback(FeedBack fbr) {
 		
 		try {
-			return fbrep.getFeedback(fbr);
+			return fbrep.getOne(fbr);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}

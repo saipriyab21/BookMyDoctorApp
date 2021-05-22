@@ -1,10 +1,12 @@
 package com.cg.bookmydoctor.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,10 @@ public class FeedBack {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
 	
-	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Patient patient;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Doctor doctor;
 	
 	@Column(name="rating")
