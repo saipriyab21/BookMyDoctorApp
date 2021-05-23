@@ -1,6 +1,6 @@
 package com.cg.bookmydoctor.dto;
 
-import java.io.Serializable; 
+import java.io.Serializable;  
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+//import com.cg.bookmydoctor.dto.*;
 @Entity
 @Table(name = "AvailabilityDates")
 public class AvailabilityDates implements Serializable{
@@ -23,8 +23,9 @@ public class AvailabilityDates implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int availabilityId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Doctor.class, cascade = CascadeType.ALL)
 	private Doctor doctor;
+	
 	
 	@Column(name="fromDate")
 	private Date fromDate;

@@ -43,6 +43,8 @@ public class Doctor {
 	@Column(name="chargesPerVisit")
 	private double chargesPerVisit;
 	
+	public Doctor() {}
+	
 	public Doctor(int doctorId, String doctorName, String speciality, String location, String hospitalName,
 			long mobileNo, String email, String password, double chargesPerVisit) {
 		super();
@@ -118,6 +120,8 @@ public class Doctor {
 				+ ", location=" + location + ", hospitalName=" + hospitalName + ", mobileNo=" + mobileNo + ", email="
 				+ email + ", password=" + password + ", chargesPerVisit=" + chargesPerVisit + "]";
 	}
+
+	
 	
 	
 }
