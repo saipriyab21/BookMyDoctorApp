@@ -26,6 +26,10 @@ public class User {
 	@Column(name="role")
 	private String role; // admin//doctor //patient
 	
+	
+	public User() {}
+	
+	
 	public User(int userId, String userName, String password, String role) {
 		super();
 		this.userId = userId;

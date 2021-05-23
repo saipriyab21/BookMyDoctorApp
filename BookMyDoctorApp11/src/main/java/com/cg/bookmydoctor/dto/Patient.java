@@ -46,6 +46,8 @@ public class Patient implements Serializable {
 	@Column(name="address")
 	private String address;
 	
+	public Patient() {} 
+	
 	
 	public Patient(int patientId, String patientName,long mobileNo,String email, String password,
 			String bloodGroup, String gender, int age, String address) {

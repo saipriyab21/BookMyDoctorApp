@@ -2,6 +2,7 @@ package com.cg.bookmydoctor.serviceImpl;
 import java.util.List;  
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.FeedBackException;
@@ -9,9 +10,11 @@ import com.cg.bookmydoctor.repository.FeedBackRepository;
 import com.cg.bookmydoctor.service.IFeedbackService;
 
 @Service
-public class FeedbackServiceImpl implements IFeedbackService {
+public class FeedbackServiceImpl implements IFeedbackService { 
 	
-	FeedBackRepository fbrep;
+	
+	@Autowired
+	private FeedBackRepository fbrep;
 
 
 	@Override

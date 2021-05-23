@@ -34,13 +34,19 @@ public class Appointment {
 	@Column(name="appointmentStatus")
 	private String appointmentStatus;//approved ,cancelled,completed	
 	
-	public Appointment(int appointmentId, LocalDateTime appointmentDate, String appointmentStatus) {
+	public Appointment() {}
+
+	
+	public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDateTime appointmentDate,
+			String appointmentStatus) {
 		super();
 		this.appointmentId = appointmentId;
-		this.appointmentDate =  appointmentDate;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.appointmentDate = appointmentDate;
 		this.appointmentStatus = appointmentStatus;
 	}
-	
+
 	public int getAppointmentId() {
 		return appointmentId;
 	}

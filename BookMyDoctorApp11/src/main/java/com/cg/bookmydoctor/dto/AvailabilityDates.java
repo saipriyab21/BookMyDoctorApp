@@ -33,13 +33,18 @@ public class AvailabilityDates implements Serializable{
 	@Column(name="toDate")
 	private Date toDate;
 	
-	public AvailabilityDates(int availabilityId, Date fromDate, Date toDate) {
+	
+	public AvailabilityDates() {}
+	
+	
+	public AvailabilityDates(int availabilityId, Doctor doctor, Date fromDate, Date toDate) {
 		super();
 		this.availabilityId = availabilityId;
-		this.fromDate =  fromDate;
+		this.doctor = doctor;
+		this.fromDate = fromDate;
 		this.toDate = toDate;
 	}
-	
+
 	
 	public int getAvailabilityId() {
 		return availabilityId;

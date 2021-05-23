@@ -30,13 +30,17 @@ public class FeedBack {
 	@Column(name="feedback")
 	private String feedback;
 	
-	public FeedBack(int ratingId, int rating, String feedback) {
+	public FeedBack() {}
+	
+	public FeedBack(int ratingId, Patient patient, Doctor doctor, int rating, String feedback) {
 		super();
 		this.ratingId = ratingId;
-		this.rating =  rating;
+		this.patient = patient;
+		this.doctor = doctor;
+		this.rating = rating;
 		this.feedback = feedback;
 	}
-	
+
 	public int getRatingId() {
 		return ratingId;
 	}

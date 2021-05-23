@@ -24,7 +24,7 @@ public class Admin {
 	@Column(name="pwd")
 	private String password;
 	
-	
+	public Admin() {}
 	public Admin(int adminId, String email, String password) {
 		super();
 		this.adminId = adminId;
