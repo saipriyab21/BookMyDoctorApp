@@ -32,7 +32,7 @@ public class Doctor {
 	private String hospitalName;
 	
 	@Column(name="mobileNo")
-	private long mobileNo;
+	private String mobileNo;
 	
 	@Column(name="email")
 	private String email;
@@ -46,7 +46,7 @@ public class Doctor {
 	public Doctor() {}
 	
 	public Doctor(int doctorId, String doctorName, String speciality, String location, String hospitalName,
-			long mobileNo, String email, String password, double chargesPerVisit) {
+			String mobileNo, String email, String password, double chargesPerVisit) {
 		super();
 		this.doctorId = doctorId;
 		this.doctorName = doctorName;
@@ -89,10 +89,10 @@ public class Doctor {
 	public void setHospitalName(String hospitalName) {
 		this.hospitalName = hospitalName;
 	}
-	public long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
-	public void setMobileNo(long mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 	public String getEmail() {
