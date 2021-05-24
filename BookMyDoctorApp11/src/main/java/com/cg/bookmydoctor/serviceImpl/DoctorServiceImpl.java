@@ -13,17 +13,17 @@ import com.cg.bookmydoctor.service.IDoctorService;
 
 @Service
 public class DoctorServiceImpl implements IDoctorService {
-	
+
 	@Autowired
 	private DoctorRepository docrep;
 	private AvailabilityDates ad;
-	
+
 	@Override
 	public List<Doctor> getDoctorList(String speciality) {
 		return docrep.findBySpeciality(speciality);
 	}
-	
-	
+
+
 	//all the details doctors
 	@Override
 	public List<Doctor> getDoctorList() {
@@ -33,12 +33,14 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public Doctor removeDoctor(Doctor doc) {
-		if(doc==null) {
+		Doctor dr = doc;
+		Optional<Doctor> docdb = this.docrep.findById(doc.getDoctorId());
+		if(docdb.isPresent()) {
+			docrep.deleteById(doc.getDoctorId());			
+		} else {
 			throw new DoctorException("The passed object can't be null");
 		}
-		Doctor dr = doc;
-		docrep.deleteById(doc.getDoctorId());
-		return dr;
+		return null;
 	}
 
 	public Doctor getDoctor(Doctor doc) {
@@ -50,9 +52,9 @@ public class DoctorServiceImpl implements IDoctorService {
 		else {
 			throw new DoctorException("Record not found with id : " + doc.getDoctorId());
 		}
-		
+
 	}
-	
+
 	@Override
 	public Doctor updateDoctorProfile(Doctor bean) {
 		Optional<Doctor> docdb = this.docrep.findById(bean.getDoctorId());
@@ -67,8 +69,14 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public Doctor addDoctor(Doctor dr) {
-		
-		return docrep.save(dr);
+
+		Optional<Doctor> docdb = this.docrep.findById(dr.getDoctorId());
+		if(docdb.isPresent()) {
+			throw new DoctorException("Doctor already exists");
+		} else {
+
+			return docrep.save(dr);
+		}
 	}
 
 	public boolean addAvailability(AvailabilityDates bean) {
@@ -78,8 +86,8 @@ public class DoctorServiceImpl implements IDoctorService {
 		}	
 		return false;
 	} 
-	
-	
+
+
 	public boolean updateAvailability(AvailabilityDates bean) {
 		if(bean.getAvailabilityId() == ad.getAvailabilityId()) {
 			ad.setAvailabilityId(bean.getAvailabilityId());
