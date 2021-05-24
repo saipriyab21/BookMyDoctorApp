@@ -11,19 +11,23 @@ import com.cg.bookmydoctor.service.IFeedbackService;
 
 @Service
 public class FeedbackServiceImpl implements IFeedbackService { 
-	
-	
+
+
 	@Autowired
 	private FeedBackRepository fbrep;
 
 
 	@Override
 	public FeedBack addFeedback(FeedBack fdb) {
-
-		if (fdb == null) {
-			throw new FeedBackException("The passed object cannot be null.");
+		Optional<FeedBack> docdb = this.fbrep.findById(fdb.getRatingId());
+		if (docdb.isPresent()) {
+			throw new FeedBackException("The passed object already exists");
 		}
-		return fbrep.save(fdb);
+		else if (docdb.isEmpty()) {
+			throw new FeedBackException("The passed object can't be null");
+		} else {
+			return fbrep.save(fdb);
+		}
 
 	}
 
@@ -37,9 +41,9 @@ public class FeedbackServiceImpl implements IFeedbackService {
 		else {
 			throw new FeedBackException("Record not found with id : " + fdb.getRatingId());
 		}
-		
+
 	}
-	
+
 	@Override
 	public List<FeedBack> getAllFeedback(Doctor doc) {
 		List<FeedBack> result = fbrep.findAll();

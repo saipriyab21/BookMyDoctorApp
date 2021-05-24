@@ -73,8 +73,9 @@ public class DoctorServiceImpl implements IDoctorService {
 		Optional<Doctor> docdb = this.docrep.findById(dr.getDoctorId());
 		if(docdb.isPresent()) {
 			throw new DoctorException("Doctor already exists");
+		} else if(docdb.isEmpty()){
+			throw new DoctorException("Passed object can't be null");
 		} else {
-
 			return docrep.save(dr);
 		}
 	}

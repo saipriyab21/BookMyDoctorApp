@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class FeedBack {
 	
 	@Id
-	@Column(name = "ratingId")
+	@Column(name = "ratingId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
 	

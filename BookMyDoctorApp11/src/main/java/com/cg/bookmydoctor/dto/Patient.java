@@ -18,7 +18,7 @@ public class Patient implements Serializable {
 
 	
 	@Id
-	@Column(name = "patientId")
+	@Column(name = "patientId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int patientId;
 	

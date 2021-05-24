@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Appointment {
 	
 	@Id
-	@Column(name = "appointmentId")
+	@Column(name = "appointmentId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int appointmentId;
 	

@@ -19,7 +19,7 @@ public class AvailabilityDates implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "availabiltyId")
+	@Column(name = "availabiltyId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int availabilityId;
 	
