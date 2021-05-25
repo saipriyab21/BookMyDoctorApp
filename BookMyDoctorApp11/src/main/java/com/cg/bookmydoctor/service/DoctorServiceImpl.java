@@ -2,6 +2,8 @@ package com.cg.bookmydoctor.service;
 
 
 
+
+
 import java.util.ArrayList;   
 import java.util.List;      
 import java.util.Optional;
@@ -9,11 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.DoctorException;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.cg.bookmydoctor.dao.*;
-import com.cg.bookmydoctor.service.IDoctorService;
+
 
 @Service
 public class DoctorServiceImpl implements IDoctorService {
@@ -23,7 +22,8 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public List<Doctor> getDoctorList(String speciality) {
-		Optional<Doctor> findById = docDao.findById(speciality);
+		
+		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
 		List<Doctor> doclist =  null;
 		if (findById.isPresent()) {
 			doclist.add(findById.get());
@@ -35,6 +35,7 @@ public class DoctorServiceImpl implements IDoctorService {
 
 
 	//all the details doctors
+	//working
 	@Override
 	public List<Doctor> getDoctorList() {
 		Iterable<Doctor> result = docDao.findAll();
@@ -43,16 +44,14 @@ public class DoctorServiceImpl implements IDoctorService {
 		return resultList;
 	}
 	
-
+	//working
 	@Override
 	public Doctor addDoctor(Doctor dr) {
-		Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
-		if(findById.isPresent()) {
-			return docDao.save(dr);
-		} else if(findById.isEmpty()){
+		//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
+		if(dr == null) {
 			throw new DoctorException("Passed object can't be null");
 		} else {
-			throw new DoctorException("Object not found");
+			return docDao.save(dr);
 		}
 	}
 
@@ -122,5 +121,3 @@ public class DoctorServiceImpl implements IDoctorService {
 	} 
 
 }
-
-

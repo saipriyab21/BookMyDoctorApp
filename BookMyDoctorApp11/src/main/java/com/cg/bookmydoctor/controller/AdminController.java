@@ -31,7 +31,7 @@ public class AdminController {
 
 	@GetMapping("/viewAdmin")
 	@ExceptionHandler(AdminException.class)
-	public Admin viewAirport(@RequestBody Admin Admin) {
+	public Admin viewAdmin(@RequestBody Admin Admin) {
 		return adminservice.viewAdmin(Admin);
 	}
 

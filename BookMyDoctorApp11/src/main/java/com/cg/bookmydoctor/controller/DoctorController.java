@@ -1,15 +1,12 @@
 package com.cg.bookmydoctor.controller;
 
-import java.math.BigInteger;   
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +19,7 @@ import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.service.DoctorServiceImpl;
 
 
-@CrossOrigin("http://localhost:3500")
+//@CrossOrigin("http://localhost:3500")
 @RestController
 @RequestMapping("/Doctor")
 public class DoctorController {
@@ -44,13 +41,11 @@ public class DoctorController {
 	}
 	
 	@PostMapping("/addAvailability")
-	@ExceptionHandler(DoctorException.class)
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
 	
 	@PostMapping("/updateAvailability")
-	@ExceptionHandler(DoctorException.class)
 	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.updateAvailability(bean);
 	}
@@ -74,6 +69,7 @@ public class DoctorController {
 	}
 	
 	@GetMapping("/allDoctors/{id}")
+	@ExceptionHandler(DoctorException.class)
 	public List<Doctor> getDoctorList(String speciality) {
 		return doctorService.getDoctorList(speciality);
 	}
