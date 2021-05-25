@@ -13,17 +13,9 @@ import org.springframework.stereotype.Repository;
 public interface IDoctorDao  extends CrudRepository<Doctor,Integer >
 {
 
-	//Optional<Doctor> findById(String speciality);
-
-	//Optional<Doctor> findById(String string);
+	
 
 	void save(AvailabilityDates bean);
-
-
-	//Optional<Doctor> findBySpeciality(String speciality);
-
-
-	//Iterable<Doctor> findAll(String speciality);
 
 
 	Optional<Doctor> findBySpeciality(String speciality);

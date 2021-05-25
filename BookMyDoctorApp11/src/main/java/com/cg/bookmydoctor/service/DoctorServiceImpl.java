@@ -19,19 +19,10 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Autowired
 	IDoctorDao docDao;
-
-	@Override
-	public List<Doctor> getDoctorList(String speciality) {
-		
-		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
-		List<Doctor> doclist =  null;
-		if (findById.isPresent()) {
-			doclist.add(findById.get());
-		} else
-			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
-
-		return doclist;
-	}
+	Doctor doctor;
+	
+	
+	
 
 
 	//all the details doctors
@@ -55,6 +46,20 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 	}
 
+	//working
+	@Override
+	public Doctor updateDoctorProfile(Doctor bean) {
+		// TODO Auto-generated method stub
+		//Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
+		if(bean == null) {
+			throw new DoctorException("Passed object can't be null");
+		} else {
+			return docDao.save(bean);
+		}
+	}
+	
+	
+	
 	public boolean updateAvailability(AvailabilityDates bean) {
 		if(bean.getAvailabilityId() == ad.getAvailabilityId()) {
 			ad.setAvailabilityId(bean.getAvailabilityId());
@@ -75,12 +80,12 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Override
 	public Doctor removeDoctor(Doctor doc) {
 		Doctor dr = doc;
-		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
-		if(docdb.isPresent()) {
-			docDao.delete(doc);	
+		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
+		if(doc == null) {
+			throw new DoctorException("The passed object can't be null");
 
 		} else {
-			throw new DoctorException("The passed object can't be null");
+			docDao.deleteById(doc.getDoctorId());	
 		}
 		return dr;
 	}
@@ -89,7 +94,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
 
 		if(docdb.isPresent()) {
-			return docdb.get();
+			return doc;
 		} 
 		else {
 			throw new DoctorException("Record not found with id : " + doc.getDoctorId());
@@ -105,19 +110,20 @@ public class DoctorServiceImpl implements IDoctorService {
 		}	
 		return false;
 	}
-
-
+	
 	@Override
-	public Doctor updateDoctorProfile(Doctor bean) {
-		// TODO Auto-generated method stub
-		Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
+	public List<Doctor> getDoctorList(String speciality) {
+		
+		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
+		List<Doctor> doclist =  null;
 		if (findById.isPresent()) {
-			docDao.save(bean);
-		} 
-		else
-			throw new DoctorException("Doctor with ID: " + bean.getDoctorId() + "does not exists");
-		return bean;
+			doclist.add(findById.get());
+		} else
+			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
 
-	} 
+		return doclist;
+	}
+
+	
 
 }

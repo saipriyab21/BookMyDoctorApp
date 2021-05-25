@@ -26,48 +26,50 @@ public class DoctorController {
 	@Autowired(required = true)
 	DoctorServiceImpl doctorService;
 
-	
+	//working
 	@PostMapping("/addDoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor addDoctor(@RequestBody Doctor doctor) {
 		return doctorService.addDoctor(doctor);
 	}
 
-	
+	//working
+	@GetMapping("/allDoctors")
+	public List<Doctor> getDoctorList() {
+		return doctorService.getDoctorList();
+	}
+
+	//working
+	@DeleteMapping("/removeDoctor")
+	@ExceptionHandler(DoctorException.class)
+	public Doctor removeDoctor(@RequestBody Doctor doctor) {
+		return doctorService.removeDoctor(doctor);
+	}
+
+	//working
 	@PutMapping("/updateDoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) {
 		return doctorService.updateDoctorProfile(doctor);
 	}
-	
+
 	@PostMapping("/addAvailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
-	
+
 	@PostMapping("/updateAvailability")
 	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.updateAvailability(bean);
 	}
-	
+
 	@GetMapping("/getDoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor getDoctor(@RequestBody Doctor doctor) {
 		return doctorService.getDoctor(doctor);
 	}
 
-	
-	@DeleteMapping("/removeDoctor")
-	@ExceptionHandler(DoctorException.class)
-	public Doctor removeDoctor(@RequestBody Doctor doctor) {
-		return doctorService.removeDoctor(doctor);
-	}
-	
-	@GetMapping("/allDoctors")
-	public List<Doctor> getDoctorList() {
-		return doctorService.getDoctorList();
-	}
-	
+
 	@GetMapping("/allDoctors/{id}")
 	@ExceptionHandler(DoctorException.class)
 	public List<Doctor> getDoctorList(String speciality) {
