@@ -26,7 +26,7 @@ public class Patient implements Serializable {
 	private String patientName;
 	
 	@Column(name="mobileNo")
-	private long mobileNo;
+	private String mobileNo;
 	
 	@Column(name="email")
 	private String email;
@@ -49,7 +49,7 @@ public class Patient implements Serializable {
 	public Patient() {} 
 	
 	
-	public Patient(int patientId, String patientName,long mobileNo,String email, String password,
+	public Patient(int patientId, String patientName,String mobileNo,String email, String password,
 			String bloodGroup, String gender, int age, String address) {
 		super();
 		this.patientId = patientId;
@@ -77,10 +77,10 @@ public class Patient implements Serializable {
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
 	}
-	public long getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
-	public void setMobileNo(long mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 	public String getEmail() {

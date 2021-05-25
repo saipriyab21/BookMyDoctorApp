@@ -1,12 +1,9 @@
 package com.cg.bookmydoctor.controller;
 
-import java.math.BigInteger; 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.Patient;
-import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.exception.PatientException;
-import com.cg.bookmydoctor.service.DoctorServiceImpl;
 import com.cg.bookmydoctor.service.PatientServiceImpl;
 
 
-@CrossOrigin("http://localhost:3500")
+//@CrossOrigin("http://localhost:3500")
 @RestController
 @RequestMapping("/PatientService")
 
@@ -34,42 +28,42 @@ public class PatientController {
 	@Autowired(required = true)
 	PatientServiceImpl PatientService;
 
-	
+	//working
 	@PostMapping("/addPatient")
 	@ExceptionHandler(PatientException.class)
 	public Patient addPatient(@RequestBody Patient bean) {
 		return PatientService.addPatient(bean);
 	}
 
-	
+	//working
 	@PutMapping("/updatePatient")
 	@ExceptionHandler(PatientException.class)
 	public Patient editPatientProfile(@RequestBody Patient bean) {
 		return PatientService.editPatientProfile(bean);
 	}
 	
-	
-	@DeleteMapping("/removePatientDetailsr")
+	//working
+	@DeleteMapping("/removePatientDetails")
 	@ExceptionHandler(PatientException.class)
 	public Patient removePatientDetails(@RequestBody Patient bean) {
 		return PatientService.removePatientDetails(bean);
 	}
 	
-	
-	@GetMapping("/getPatient")
+	//working
+	@GetMapping("/getPatient/{patientId}")
 	@ExceptionHandler(PatientException.class)
-	public Patient getPatient(@RequestBody Patient Patient) {
+	public Patient getPatient(@PathVariable("patientId") Patient Patient) {
 		return PatientService.getPatient(Patient);
 	}
 
-	
+	//working
 	@GetMapping("/allPatient")
 	public List<Patient> getAllPatient() {
 		return PatientService.getAllPatient();
 	}
 	
-	@GetMapping("/allPatientByDoctor")
-	public List<Patient> getPatientListByDoctor(Doctor doc) {
+	@GetMapping("/allPatientByDoctor/{doctorName}")
+	public List<Patient> getPatientListByDoctor(@PathVariable("doctorName") Doctor doc) {
 		return PatientService.getPatientListByDoctor(doc);
 	}
 	

@@ -23,7 +23,7 @@ import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.service.AppointmentServiceImpl;
 
 
-@CrossOrigin("http://localhost:3500")
+//@CrossOrigin("http://localhost:3500")
 @RestController
 @RequestMapping("/Appointments")
 public class AppointmentController {
@@ -34,6 +34,12 @@ public class AppointmentController {
 	@GetMapping("/AllAppointments")
 	public List<Appointment> getAllAppointments() {
 		return AppointmentService.getAllAppointments();
+	}
+	
+	@PostMapping("/addAppointment")
+	@ExceptionHandler(AppointmentException.class)
+	public Appointment addAppointment(@RequestBody Appointment app) {
+		return AppointmentService.addAppointment(app);
 	}
 	
 	

@@ -1,6 +1,5 @@
 package com.cg.bookmydoctor.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -10,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,10 +23,15 @@ public class Appointment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int appointmentId;
 	
-	@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
+	//@OneToOne(mappedBy="doctorId")
+	@JoinColumn(name = "doctorId")
 	private Doctor doctor;
 	
-	@OneToOne(targetEntity = Patient.class, fetch = FetchType.EAGER)
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	//@OneToOne(mappedBy="patientId")
+	@JoinColumn(name = "patientId")
 	private Patient patient;
 	
 	@Column(name="appointmentDate")
@@ -54,12 +59,16 @@ public class Appointment {
 	public void setAppointmentId(int appointmentId) {
 		this.appointmentId = appointmentId;
 	}
+	
+	
 	public Doctor getDoctor() {
 		return doctor;
 	}
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
+	
+	
 	public Patient getPatient() {
 		return patient;
 	}

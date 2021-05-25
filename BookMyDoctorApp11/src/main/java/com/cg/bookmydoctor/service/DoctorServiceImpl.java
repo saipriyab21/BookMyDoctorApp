@@ -70,6 +70,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		return dr;
 	}
 	
+	
 	//working
 	public Doctor getDoctor(Doctor doc) {
 		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
@@ -77,6 +78,21 @@ public class DoctorServiceImpl implements IDoctorService {
 		
 	}
 	
+	
+	//working
+		@Override
+		public List<Doctor> getDoctorList(String speciality) {
+			
+			Optional<Doctor> findById = docDao.findBySpeciality(speciality);
+			List<Doctor> doclist = new ArrayList<>();
+			if (findById.isPresent()) {
+				doclist.add(findById.get());
+			} else
+				throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
+
+			return doclist;
+		}
+
 	public boolean updateAvailability(int availabilityId) {
 		if(availabilityId > 0) {
 			//ad.setAvailabilityId(ad.getAvailabilityId());
@@ -92,10 +108,6 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	private AvailabilityDates ad;
 
-
-	
-
-
 	public boolean addAvailability(AvailabilityDates bean) {
 		if(bean != null) {
 			//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId())
@@ -105,21 +117,4 @@ public class DoctorServiceImpl implements IDoctorService {
 		return false;
 	}
 	
-	
-	//working
-	@Override
-	public List<Doctor> getDoctorList(String speciality) {
-		
-		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
-		List<Doctor> doclist = new ArrayList<>();
-		if (findById.isPresent()) {
-			doclist.add(findById.get());
-		} else
-			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
-
-		return doclist;
-	}
-
-		
-
 }
