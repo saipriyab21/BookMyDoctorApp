@@ -3,6 +3,7 @@ package com.cg.bookmydoctor.dto;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,10 +19,10 @@ public class FeedBack {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Patient.class, cascade = CascadeType.ALL)
 	private Patient patient;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
 	private Doctor doctor;
 	
 	@Column(name="rating")

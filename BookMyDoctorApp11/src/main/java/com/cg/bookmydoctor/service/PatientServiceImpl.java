@@ -21,46 +21,30 @@ public class PatientServiceImpl implements IPatientService {
 	
 	@Override
 	public Patient addPatient(Patient bean) {
-		Optional<Patient> findById = patientDao.findById(bean.getPatientId());
-		if(findById.isPresent()) {
-			return patientDao.save(bean);
-		} else if(findById.isEmpty()){
+		if(bean == null) {
 			throw new PatientException("Passed object can't be null");
 		} else {
-			throw new PatientException("Object not found");
+			return patientDao.save(bean);
 		}
 	}
 	
 	@Override
 	public Patient editPatientProfile(Patient bean) {
-		Optional<Patient> patientDb = this.patientDao.findById(bean.getPatientId());
-		if(patientDb.isPresent()) {
-			Patient existingPatient = patientDb.get();	
-			
-			existingPatient.setAddress(bean.getAddress());
-			existingPatient.setEmail(bean.getEmail());
-			existingPatient.setPassword(bean.getPassword());
-			existingPatient.setAge(bean.getAge());
-			existingPatient.setBloodGroup(bean.getBloodGroup());
-			existingPatient.setGender(bean.getGender());
-			existingPatient.setMobileNo(bean.getMobileNo());
-			existingPatient.setPatientName(bean.getPatientName());
-			
-			return patientDao.save(existingPatient);
-		}
-		else {
-			throw new PatientException("Record not found with id : " + bean.getPatientId());
+		if(bean == null) {
+			throw new PatientException("Passed object can't be null");
+		} else {
+			return patientDao.save(bean);
 		}
 	}
 		
 	@Override
 	public Patient removePatientDetails(Patient bean) {
 		Patient Patient1 = bean;
-		Optional<Patient> docdb = patientDao.findById(bean.getPatientId());
-		if(docdb.isPresent()) {
-			patientDao.delete(bean);	
-		} else {
+		if(bean == null) {
 			throw new PatientException("The passed object can't be null");
+
+		} else {
+			patientDao.deleteById(bean.getPatientId());
 		}
 		return Patient1;
 	}

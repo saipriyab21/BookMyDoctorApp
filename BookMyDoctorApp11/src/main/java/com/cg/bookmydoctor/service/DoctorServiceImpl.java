@@ -20,11 +20,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	IDoctorDao docDao;
 	Doctor doctor;
+	IAvailabilityDao availDao;
 	
-	
-	
-
-
 	//all the details doctors
 	//working
 	@Override
@@ -59,24 +56,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 	
 	
-	
-	public boolean updateAvailability(AvailabilityDates bean) {
-		if(bean.getAvailabilityId() == ad.getAvailabilityId()) {
-			ad.setAvailabilityId(bean.getAvailabilityId());
-			ad.setDoctor(bean.getDoctor());
-			ad.setFromDate(bean.getFromDate());
-			ad.setToDate(bean.getToDate());
-			return true;		
-		} else {
-			//throw new DoctorException("Couldn't update availability dates");
-			return false;
-		}
-	}
-
-
-	private AvailabilityDates ad;
-
-
+	//working
 	@Override
 	public Doctor removeDoctor(Doctor doc) {
 		Doctor dr = doc;
@@ -89,33 +69,49 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 		return dr;
 	}
-
+	
+	//working
 	public Doctor getDoctor(Doctor doc) {
 		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
-
-		if(docdb.isPresent()) {
-			return doc;
-		} 
-		else {
-			throw new DoctorException("Record not found with id : " + doc.getDoctorId());
-		}
-
+			return docdb.get();
+		
 	}
+	
+	public boolean updateAvailability(int availabilityId) {
+		if(availabilityId > 0) {
+			//ad.setAvailabilityId(ad.getAvailabilityId());
+			ad.setDoctor(ad.getDoctor());
+			ad.setFromDate(ad.getFromDate());
+			ad.setToDate(ad.getToDate());
+			return true;		
+		} else {
+			return false;
+		}
+	}
+
+
+	private AvailabilityDates ad;
+
+
+	
 
 
 	public boolean addAvailability(AvailabilityDates bean) {
 		if(bean != null) {
-			docDao.save(bean);
-			return true;
+			//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId())
+				availDao.save(bean);
+				return true;
 		}	
 		return false;
 	}
 	
+	
+	//working
 	@Override
 	public List<Doctor> getDoctorList(String speciality) {
 		
 		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
-		List<Doctor> doclist =  null;
+		List<Doctor> doclist = new ArrayList<>();
 		if (findById.isPresent()) {
 			doclist.add(findById.get());
 		} else
@@ -124,6 +120,6 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doclist;
 	}
 
-	
+		
 
 }

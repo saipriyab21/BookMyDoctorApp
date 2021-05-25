@@ -22,13 +22,11 @@ public class FeedbackServiceImpl implements IFeedbackService {
 
 	@Override
 	public FeedBack addFeedback(FeedBack fdb) {
-		Optional<FeedBack> findById = fbDao.findById(fdb.getRatingId());
-		if(findById.isPresent()) {
+		//Optional<FeedBack> findById = fbDao.findById(fdb.getRatingId());
+		if(fdb != null) {
 			return fbDao.save(fdb);
-		} else if(findById.isEmpty()){
-			throw new FeedBackException("Passed object can't be null");
-		} else {
-			throw new FeedBackException("Object not found");
+		}  else {
+			throw new FeedBackException("Parsed object is null");
 		}
 
 	}

@@ -1,10 +1,12 @@
 package com.cg.bookmydoctor.dao;
 
-import java.util.List; 
+import java.util.List;  
 import java.util.Optional;
 
 import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,12 +15,10 @@ import org.springframework.stereotype.Repository;
 public interface IDoctorDao  extends CrudRepository<Doctor,Integer >
 {
 
-	
-
-	void save(AvailabilityDates bean);
-
 
 	Optional<Doctor> findBySpeciality(String speciality);
+
+	//void saveDates(AvailabilityDates bean);
 
 	/*public Doctor addDoctor(Doctor bean);
 	public Doctor updateDoctorProfile(Doctor bean);

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.AdminException;
-
+import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.dao.*;
 
 @Service
@@ -16,24 +16,22 @@ public class AdminServiceImpl implements IAdminService {
 
 	@Override
 	public Admin addAdmin(Admin admin) {
-		Optional<Admin> findById = adminDao.findById(admin.getAdminId());
-		if(findById.isPresent()) {
-			return adminDao.save(admin);
-		} else if(findById.isEmpty()){
+		if(admin == null) {
 			throw new AdminException("Passed object can't be null");
 		} else {
-			throw new AdminException("Object not found");
+			return adminDao.save(admin);
 		}
 	}
 
 	@Override
 	public Admin removeAdmin(Admin admin) {
-		Admin adm =admin;
-		Optional<Admin> docdb = adminDao.findById(admin.getAdminId());
-		if(docdb.isPresent()) {
-			adminDao.delete(admin);	
-		} else {
+		Admin adm = admin;
+		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
+		if(admin == null) {
 			throw new AdminException("The passed object can't be null");
+
+		} else {
+			adminDao.deleteById(admin.getAdminId());
 		}
 		return adm;	
 	}
@@ -52,15 +50,11 @@ public class AdminServiceImpl implements IAdminService {
 
 	@Override
 	public Admin updateAdmin(Admin admin) {
-		Optional<Admin> adminDb = this.adminDao.findById(admin.getAdminId());
-		//Optional<Airport> findById = airportDao.findById(airport.getAirportCode());
-		if (adminDb.isPresent()) {
-			adminDao.save(admin);
-		} 
-		else
-			throw new AdminException("Airport with code: " + admin.getAdminId() + " not exists");
-		return admin;
-
+		if(admin == null) {
+			throw new AdminException("Passed object can't be null");
+		} else {
+			return adminDao.save(admin);
+		}
 	}
 
 }

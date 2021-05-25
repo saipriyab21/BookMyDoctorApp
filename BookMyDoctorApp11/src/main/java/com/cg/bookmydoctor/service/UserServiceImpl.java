@@ -21,38 +21,33 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
-		Optional<User> findById = userDao.findById(user.getUserId());
-		if(findById.isPresent()) {
-			return userDao.save(user);
-		} else if(findById.isEmpty()){
+		if(user == null) {
 			throw new UserException("Passed object can't be null");
 		} else {
-			throw new UserException("Object not found");
+			return userDao.save(user);
 		}
 	}
 
 	@Override
 	public User updateUser(User user) {
-		Optional<User> findById = userDao.findById(user.getUserId());
-		if(findById.isPresent()) {
-			return userDao.save(user);
-		} else if(findById.isEmpty()){
+		if(user == null) {
 			throw new UserException("Passed object can't be null");
 		} else {
-			throw new UserException("Object not found");
+			return userDao.save(user);
 		}
 	}
 
 	@Override
 	public User removeUser(User user) {
 		User user1 = user;
-		Optional<User> userdb = userDao.findById(user.getUserId());
-		if(userdb.isPresent()) {
-			userDao.delete(user);	
+		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
+		if(user == null) {
+			throw new UserException("The passed object can't be null");
 
 		} else {
-			throw new UserException("The passed object can't be null");
+			userDao.deleteById(user.getUserId());
 		}
+		
 		return user1;
 	}
 

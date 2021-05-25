@@ -14,6 +14,7 @@ public interface IAppointmentService {
 	public boolean updateAppointment(Appointment bean);
 	public List<Appointment> getAppointments(Doctor doc);
 	public List<Appointment> getAppointments(LocalDate doc);
+	Appointment addAppointment(Appointment app);
 	
 
 }

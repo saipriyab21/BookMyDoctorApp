@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,26 +54,33 @@ public class DoctorController {
 		return doctorService.updateDoctorProfile(doctor);
 	}
 
+	
+	//working
+	@GetMapping("/getDoctor/{doctorId}")
+	//@ExceptionHandler(DoctorException.class)
+	public Doctor getDoctor(@PathVariable("doctorId") Doctor doc) {
+		return doctorService.getDoctor(doc);
+	}
+	
+	//working
+	@GetMapping("/allDoctors/{speciality}")
+	@ExceptionHandler(DoctorException.class)
+	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) {
+		return doctorService.getDoctorList(speciality);
+	}
+	
+	
 	@PostMapping("/addAvailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
 
 	@PostMapping("/updateAvailability")
-	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
-		return doctorService.updateAvailability(bean);
+	public boolean updateAvailability(@RequestBody int availabilityId) {
+		return doctorService.updateAvailability(availabilityId);
 	}
 
-	@GetMapping("/getDoctor")
-	@ExceptionHandler(DoctorException.class)
-	public Doctor getDoctor(@RequestBody Doctor doctor) {
-		return doctorService.getDoctor(doctor);
-	}
+	
 
-
-	@GetMapping("/allDoctors/{id}")
-	@ExceptionHandler(DoctorException.class)
-	public List<Doctor> getDoctorList(String speciality) {
-		return doctorService.getDoctorList(speciality);
-	}
+	
 }

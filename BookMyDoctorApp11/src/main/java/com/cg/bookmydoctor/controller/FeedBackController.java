@@ -23,7 +23,7 @@ import com.cg.bookmydoctor.service.FeedbackServiceImpl;
 
 @CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/doctorappointments")
+@RequestMapping("/Feedback")
 public class FeedBackController {
 	@Autowired(required = true)
 	FeedbackServiceImpl feedbackService;

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,10 +23,10 @@ public class Appointment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int appointmentId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
 	private Doctor doctor;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Patient.class, fetch = FetchType.EAGER)
 	private Patient patient;
 	
 	@Column(name="appointmentDate")
