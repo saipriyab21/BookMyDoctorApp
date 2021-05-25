@@ -30,36 +30,43 @@ public class AppointmentController {
 	@Autowired(required = true)
 	AppointmentServiceImpl AppointmentService;
 
-	
+	//working
 	@GetMapping("/AllAppointments")
 	public List<Appointment> getAllAppointments() {
 		return AppointmentService.getAllAppointments();
 	}
 	
+	//working, input for doc and patient it is taking null
 	@PostMapping("/addAppointment")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
 		return AppointmentService.addAppointment(app);
 	}
 	
-	
+	//working
 	@GetMapping("/getAppointment/{id}")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment getAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.getAppointment(AppointmentId);
 	}
 
+	
+	//working
 	@DeleteMapping("/deleteAppointment/{id}")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean deleteAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.deleteAppointment(AppointmentId);
 	}
 	
+	
+	//working
 	@PutMapping("/updateAppointment")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean updateAppointment(@RequestBody Appointment bean) {
 		return AppointmentService.updateAppointment(bean);
 	}
+	
+	
 	@GetMapping("/DoctorBasedAppointments")
 	public List<Appointment> getAppointments(Doctor doc) {
 		return AppointmentService.getAppointments(doc);

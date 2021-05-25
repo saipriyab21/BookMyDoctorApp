@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "Doctor")
 public class Doctor {
 
+	
 	@Id
 	@Column(name = "doctorId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -42,6 +43,7 @@ public class Doctor {
 	
 	@Column(name="chargesPerVisit")
 	private double chargesPerVisit;
+		
 	
 	public Doctor() {}
 	

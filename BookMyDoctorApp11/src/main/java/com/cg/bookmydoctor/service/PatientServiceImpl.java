@@ -80,9 +80,8 @@ public class PatientServiceImpl implements IPatientService {
 	
 	@Override
 	public List<Patient> getPatientListByDoctor(Doctor doctor){
-		String docname = doctor.getDoctorName();
 		List<Patient> pat = new ArrayList<>();
-		if(a.getDoctor().getDoctorName().equals(docname)) {
+		if(a.getDoctor().getDoctorName().equals(doctor.getDoctorName())) {
 			pat.add(a.getPatient());
 		}
 		return pat;

@@ -1,12 +1,7 @@
 package com.cg.bookmydoctor.controller;
 
 
-import java.math.BigInteger; 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,36 +16,40 @@ import com.cg.bookmydoctor.dto.Admin;
 import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.service.AdminServiceImpl;
 
-
-@CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/doctorappointments")
+@RequestMapping("/Admin")
 public class AdminController {
-	@Autowired(required = true)
+	
+	@Autowired
 	AdminServiceImpl adminservice ;
-
-	@GetMapping("/viewAdmin")
+	
+    //working
+   	@GetMapping("/viewAdmin/{adminId}")
 	@ExceptionHandler(AdminException.class)
-	public Admin viewAdmin(@RequestBody Admin Admin) {
-		return adminservice.viewAdmin(Admin);
+	public Admin viewAdmin(@PathVariable("adminId") Admin admin) {
+		return adminservice.viewAdmin(admin);
 	}
 
-
+   	//working
 	@PostMapping("/addAdmin")
 	@ExceptionHandler(AdminException.class)
-	public Admin addAdmin(@RequestBody Admin Admin) {
-		return adminservice.addAdmin(Admin);
+	public Admin addAdmin(@RequestBody Admin admin) {
+		return adminservice.addAdmin(admin);
 	}
 
+	
+	//working
 	@PutMapping("/updateAdmin")
 	@ExceptionHandler(AdminException.class)
-	public Admin updateAdmin(@RequestBody Admin Admin) {
-		return adminservice.updateAdmin(Admin);
+	public Admin updateAdmin(@RequestBody Admin admin) {
+		return adminservice.updateAdmin(admin);
 	}
 
+	
+	//working
 	@DeleteMapping("/removeAdmin")
 	@ExceptionHandler(AdminException.class)
-	public Admin removeAdmin(@RequestBody Admin Admin) {
-		return adminservice.removeAdmin(Admin);
+	public Admin removeAdmin(@RequestBody Admin admin) {
+		return adminservice.removeAdmin(admin);
 	}
 }

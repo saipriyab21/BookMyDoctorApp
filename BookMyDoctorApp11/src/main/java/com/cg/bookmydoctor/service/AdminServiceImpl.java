@@ -1,7 +1,7 @@
 package com.cg.bookmydoctor.service;
 
      
-import java.util.Optional;
+import java.util.Optional; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
@@ -9,8 +9,10 @@ import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.dao.*;
 
+
 @Service
 public class AdminServiceImpl implements IAdminService {
+	
 	@Autowired
 	private IAdminDao adminDao;
 
@@ -26,9 +28,8 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public Admin removeAdmin(Admin admin) {
 		Admin adm = admin;
-		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
 		if(admin == null) {
-			throw new AdminException("The passed object can't be null");
+			throw new AdminException("Record Not Found");
 
 		} else {
 			adminDao.deleteById(admin.getAdminId());
@@ -43,7 +44,7 @@ public class AdminServiceImpl implements IAdminService {
 			return adminDb.get();
 		}
 		else {
-			throw new AdminException("Record not found with id : " + admin.getAdminId());
+			throw new AdminException("Record not Found ");
 		}
 
 	}
@@ -58,4 +59,3 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 }
-
