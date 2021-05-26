@@ -90,7 +90,7 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	public List<Patient> getPatientListByDate(LocalDate appdate){
 		List<Patient> p1 = new ArrayList<>();
-		LocalDate localDate = a.getAppointmentDate().toLocalDate();
+		LocalDate localDate = a.getAppointmentDate();
 		if(localDate == appdate) {
 			p1.add(a.getPatient());
 		}

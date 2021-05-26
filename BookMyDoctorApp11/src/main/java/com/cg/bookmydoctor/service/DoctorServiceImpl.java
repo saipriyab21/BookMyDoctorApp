@@ -20,7 +20,9 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	IDoctorDao docDao;
 	Doctor doctor;
-	IAvailabilityDao availDao;
+	@Autowired
+	private IAvailabilityDao availDao;
+	//AvailabilityDates availDates;
 	
 	//all the details doctors
 	//working
@@ -108,13 +110,13 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	private AvailabilityDates ad;
 
-	public boolean addAvailability(AvailabilityDates bean) {
-		if(bean != null) {
-			//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId())
-				availDao.save(bean);
+	public boolean addAvailability(AvailabilityDates availDates) {
+		//if(bean != null) {
+			//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId()) {
+				availDao.save(availDates);
 				return true;
-		}	
-		return false;
+		//}	
+		//return false;
 	}
 	
 }

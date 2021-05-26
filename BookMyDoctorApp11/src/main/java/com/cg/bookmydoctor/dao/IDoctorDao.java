@@ -18,7 +18,10 @@ public interface IDoctorDao  extends CrudRepository<Doctor,Integer >
 
 	Optional<Doctor> findBySpeciality(String speciality);
 
-	//void saveDates(AvailabilityDates bean);
+	
+
+	//void saveAvailabilityDates(AvailabilityDates bean);
+
 
 	/*public Doctor addDoctor(Doctor bean);
 	public Doctor updateDoctorProfile(Doctor bean);

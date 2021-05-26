@@ -75,8 +75,8 @@ public class DoctorController {
 		return doctorService.addAvailability(bean);
 	}
 
-	@PostMapping("/updateAvailability")
-	public boolean updateAvailability(@RequestBody int availabilityId) {
+	@PutMapping("/updateAvailability/{availabilityId}")
+	public boolean updateAvailability(@PathVariable("availabilityId") int availabilityId) {
 		return doctorService.updateAvailability(availabilityId);
 	}
 

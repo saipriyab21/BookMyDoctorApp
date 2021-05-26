@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 //import com.cg.bookmydoctor.dto.*;
@@ -24,8 +25,10 @@ public class AvailabilityDates implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int availabilityId;
 	
-	@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
+	@OneToOne
+	@JoinColumn(name = "doctorId", referencedColumnName = "doctorId")
 	private Doctor doctor;
+	
 	
 	
 	@Column(name="fromDate")

@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,10 +20,14 @@ public class FeedBack {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ratingId;
 	
-	@OneToOne(targetEntity = Patient.class, cascade = CascadeType.ALL)
+	//@OneToOne(targetEntity = Patient.class, cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "patientId", referencedColumnName = "patientId")
 	private Patient patient;
 	
-	@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
+	//@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
+	@OneToOne
+	@JoinColumn(name = "doctorId", referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
 	@Column(name="rating")
@@ -33,11 +38,11 @@ public class FeedBack {
 	
 	public FeedBack() {}
 	
-	public FeedBack(int ratingId, Patient patient, Doctor doctor, int rating, String feedback) {
+	public FeedBack(int ratingId, Doctor doctor, Patient patient, int rating, String feedback) {
 		super();
 		this.ratingId = ratingId;
-		this.patient = patient;
 		this.doctor = doctor;
+		this.patient = patient;
 		this.rating = rating;
 		this.feedback = feedback;
 	}

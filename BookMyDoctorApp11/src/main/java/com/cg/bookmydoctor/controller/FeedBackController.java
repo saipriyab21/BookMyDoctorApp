@@ -21,7 +21,7 @@ import com.cg.bookmydoctor.dto.FeedBack;
 import com.cg.bookmydoctor.exception.FeedBackException;
 import com.cg.bookmydoctor.service.FeedbackServiceImpl;
 
-@CrossOrigin("http://localhost:3500")
+//@CrossOrigin("http://localhost:3500")
 @RestController
 @RequestMapping("/Feedback")
 public class FeedBackController {
@@ -29,7 +29,8 @@ public class FeedBackController {
 	FeedbackServiceImpl feedbackService;
 
 
-	@GetMapping("/allFeedback")
+	@RequestMapping("/allFeedbackofDoctor")
+	@ExceptionHandler(FeedBackException.class)
 	public List<FeedBack> getAllFeedBack(Doctor doc) {
 		return feedbackService.getAllFeedback(doc);
 	}
@@ -40,9 +41,9 @@ public class FeedBackController {
 		return feedbackService.addFeedback(fdb);
 	}
 
-	@GetMapping("/getFeedBack")
+	@GetMapping("/getFeedBack/{ratingId}")
 	@ExceptionHandler(FeedBackException.class)
-	public FeedBack getFeedback(@RequestBody FeedBack fdb) {
+	public FeedBack getFeedback(@PathVariable("ratingId") FeedBack fdb) {
 		return feedbackService.getFeedback(fdb);
 	}
 	

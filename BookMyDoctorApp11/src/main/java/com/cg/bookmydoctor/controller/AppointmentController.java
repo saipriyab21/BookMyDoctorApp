@@ -67,13 +67,13 @@ public class AppointmentController {
 	}
 	
 	
-	@GetMapping("/DoctorBasedAppointments")
-	public List<Appointment> getAppointments(Doctor doc) {
+	@GetMapping("/DoctorBasedAppointments/{id}")
+	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
 		return AppointmentService.getAppointments(doc);
 	}
 	
-	@GetMapping("/DateBasedAppointments")
-	public List<Appointment> getAppointments(LocalDate doc) {
+	@GetMapping("/DateBasedAppointments/{localDate}")
+	public List<Appointment> getAppointments(@PathVariable("localDate")LocalDate doc) {
 		return AppointmentService.getAppointments(doc);
 	}
 	

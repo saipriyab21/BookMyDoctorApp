@@ -33,7 +33,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		public Appointment addAppointment(Appointment app) {
 			//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
 			if(app == null) {
-				throw new AppointmentException("Passed object can't be null");
+				throw new AppointmentException("Passed object cannot be null");
 			} else {
 				return appointmentDao.save(app);
 			}
@@ -76,18 +76,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		public List<Appointment> getAppointments(Doctor doc) {
 			// TODO Auto-generated method stub
 			List<Appointment> appt  = new ArrayList<>();
-			if(appointment.getDoctor() == doc) {
+			if(appointment.getDoctor().getDoctorId() == doc.getDoctorId()) {
 				appt.add(appointment);
 			}
 			return appt;
 		}
 
 		@Override
-		public List<Appointment> getAppointments(LocalDate doc) {
+		public List<Appointment> getAppointments(LocalDate localdate) {
 			// TODO Auto-generated method stub
-			LocalDate localDate = appointment.getAppointmentDate().toLocalDate();
+			LocalDate localDate = appointment.getAppointmentDate();
 			List<Appointment> appt  = new ArrayList<>();
-			if(localDate == doc) {
+			if(localDate == localdate) {
 				appt.add(appointment);	
 			}
 			return appt;

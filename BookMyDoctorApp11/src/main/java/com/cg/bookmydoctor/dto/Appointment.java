@@ -1,5 +1,6 @@
 package com.cg.bookmydoctor.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -24,17 +25,17 @@ public class Appointment {
 	
 	//@OneToOne(cascade = CascadeType.ALL)
 	@OneToOne
-	@JoinColumn(name = "doctorId")
+	@JoinColumn(name = "doctorId", referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
 	
 	//@OneToOne(cascade = CascadeType.ALL)
 	@OneToOne
-	@JoinColumn(name = "patientId")
+	@JoinColumn(name = "patientId", referencedColumnName = "patientId")
 	private Patient patient;
 	
 	@Column(name="appointmentDate")
-	private LocalDateTime appointmentDate;
+	private LocalDate appointmentDate;
 	
 	@Column(name="appointmentStatus")
 	private String appointmentStatus;//approved ,cancelled,completed	
@@ -42,7 +43,7 @@ public class Appointment {
 	public Appointment() {}
 
 	
-	public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDateTime appointmentDate,
+	public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDate appointmentDate,
 			String appointmentStatus) {
 		super();
 		this.appointmentId = appointmentId;
@@ -74,10 +75,10 @@ public class Appointment {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	public LocalDateTime getAppointmentDate() {
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
-	public void setAppointmentDate(LocalDateTime appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 	public String getAppointmentStatus() {

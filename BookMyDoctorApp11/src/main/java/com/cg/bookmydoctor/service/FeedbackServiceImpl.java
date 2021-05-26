@@ -33,24 +33,18 @@ public class FeedbackServiceImpl implements IFeedbackService {
 
 	@Override
 	public FeedBack getFeedback(FeedBack fdb) {
-		Optional<FeedBack> fbdb = this.fbDao.findById(fdb.getRatingId());
-
-		if(fbdb.isPresent()) {
-			return fbdb.get();
-		} 
-		else {
-			throw new FeedBackException("Record not found with id : " + fdb.getRatingId());
-		}
-
+		Optional<FeedBack> feedbackDB = fbDao.findById(fdb.getRatingId());
+		return feedbackDB.get();
 	}
 
 	@Override
 	public List<FeedBack> getAllFeedback(Doctor doc) {
-		
-		List<FeedBack> list = null;
-		if(fb.getDoctor().getDoctorId() == doc.getDoctorId()) {
-			list.add(fb);
+		Optional<FeedBack> docId = fbDao.findById(doc.getDoctorId());
+		List<FeedBack> list = new ArrayList<>();
+		if(doc == null) {
+			throw new FeedBackException("Null object is passed");
+		} else {
+			return null;
 		}
-		return list;
 	}
 }
