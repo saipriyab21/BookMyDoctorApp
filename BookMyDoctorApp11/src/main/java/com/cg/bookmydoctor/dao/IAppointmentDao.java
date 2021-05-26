@@ -1,7 +1,9 @@
 package com.cg.bookmydoctor.dao;
 
-import java.time.LocalDate; 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository; 
 import org.springframework.stereotype.Repository;
@@ -10,6 +12,8 @@ import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 
 public interface IAppointmentDao extends CrudRepository<Appointment, Integer>  {
+
+	Optional<Appointment> findByDate(Date localdate);
 	
 	/*public List<Appointment> getAllAppointments();
 	public Appointment getAppointment(int appointmentId);

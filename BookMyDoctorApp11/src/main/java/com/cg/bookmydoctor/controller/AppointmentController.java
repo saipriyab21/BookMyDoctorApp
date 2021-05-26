@@ -1,7 +1,10 @@
 package com.cg.bookmydoctor.controller;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,9 +75,11 @@ public class AppointmentController {
 		return AppointmentService.getAppointments(doc);
 	}
 	
-	@GetMapping("/DateBasedAppointments/{localDate}")
-	public List<Appointment> getAppointments(@PathVariable("localDate")LocalDate doc) {
+	@GetMapping("/DateBasedAppointments/{doc}")
+	public List<Appointment> getAppointments(@PathVariable("doc") LocalDate doc) {
+		
 		return AppointmentService.getAppointments(doc);
+		
 	}
 	
 }
