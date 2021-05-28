@@ -82,15 +82,10 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			return appt;
 		}
 
+
 		@Override
-		public List<Appointment> getAppointments(LocalDate doc) {
-			// TODO Auto-generated method stub
-			LocalDate localDate = appointment.getAppointmentDate();
-			List<Appointment> appt  = new ArrayList<>();
-			if(localDate == doc) {
-				appt.add(appointment);	
-			}
-			return appt;
+		public List<Appointment> getAppointments(LocalDate date) {
+			return appointmentDao.findAllByAppointmentDate(date);
 		}
 
 }

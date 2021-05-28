@@ -16,9 +16,9 @@ import javax.persistence.Table;
 public class FeedBack {
 	
 	@Id
-	@Column(name = "ratingId", unique=true)
+	@Column(name = "feedbackId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int ratingId;
+	private int feedbackId;
 	
 	//@OneToOne(targetEntity = Patient.class, cascade = CascadeType.ALL)
 	@OneToOne
@@ -33,26 +33,37 @@ public class FeedBack {
 	@Column(name="rating")
 	private int rating;
 	
-	@Column(name="feedback")
-	private String feedback;
+	@Column(name="feedbackComment")
+	private String feedbackComment;
 	
 	public FeedBack() {}
 	
-	public FeedBack(int ratingId, Doctor doctor, Patient patient, int rating, String feedback) {
+	public FeedBack(int feedbackId, Doctor doctor, Patient patient, int rating, String feedbackComment) {
 		super();
-		this.ratingId = ratingId;
+		this.feedbackId = feedbackId;
 		this.doctor = doctor;
 		this.patient = patient;
 		this.rating = rating;
-		this.feedback = feedback;
+		this.feedbackComment = feedbackComment;
 	}
 
-	public int getRatingId() {
-		return ratingId;
+	
+	public int getFeedbackId() {
+		return feedbackId;
 	}
-	public void setRatingId(int ratingId) {
-		this.ratingId = ratingId;
+
+	public void setFeedbackId(int feedbackId) {
+		this.feedbackId = feedbackId;
 	}
+
+	public String getFeedbackComment() {
+		return feedbackComment;
+	}
+
+	public void setFeedbackComment(String feedbackComment) {
+		this.feedbackComment = feedbackComment;
+	}
+
 	public Patient getPatient() {
 		return patient;
 	}
@@ -71,17 +82,12 @@ public class FeedBack {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getFeedback() {
-		return feedback;
-	}
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
+	
 
 	@Override
 	public String toString() {
-		return "FeedBack [ratingId=" + ratingId + ", patient=" + patient + ", doctor=" + doctor + ", rating=" + rating
-				+ ", feedback=" + feedback + "]";
+		return "FeedBack [feedbackId=" + feedbackId + ", patient=" + patient + ", doctor=" + doctor + ", rating=" + rating
+				+ ", feedbackComment=" + feedbackComment + "]";
 	}
 	
 	

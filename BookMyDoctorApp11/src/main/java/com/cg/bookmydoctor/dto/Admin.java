@@ -18,6 +18,9 @@ public class Admin {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int adminId;
 	
+	@Column(name="adminName")
+	private String adminName;
+	
 	@Column(name="contactNumber")
 	private String contactNumber;
 	
@@ -30,12 +33,23 @@ public class Admin {
 	public Admin() {}
 	
 	
-	public Admin(int adminId, String contactNumber, String email, String password) {
+	public Admin(int adminId,String adminName, String contactNumber, String email, String password) {
 		super();
 		this.adminId = adminId;
+		this.adminName =  adminName;
 		this.contactNumber = contactNumber;
 		this.email = email;
 		this.password = password;
+	}
+
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
 
 
@@ -71,7 +85,8 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", email=" + email + ", password=" + password + "]";
+		return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", contactNumber=" + contactNumber
+				+ ", email=" + email + ", password=" + password + "]";
 	}
 
 }

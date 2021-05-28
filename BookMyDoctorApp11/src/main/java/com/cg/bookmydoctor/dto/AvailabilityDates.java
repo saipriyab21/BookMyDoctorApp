@@ -26,9 +26,8 @@ public class AvailabilityDates implements Serializable{
 	private int availabilityId;
 	
 	@OneToOne
-	@JoinColumn(name = "doctorId", referencedColumnName = "doctorId")
+	@JoinColumn(name = "doctorId")
 	private Doctor doctor;
-	
 	
 	
 	@Column(name="fromDate")

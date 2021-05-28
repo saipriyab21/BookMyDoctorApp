@@ -23,7 +23,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	private IAvailabilityDao availDao;
 	//AvailabilityDates availDates;
-	
+
 	//all the details doctors
 	//working
 	@Override
@@ -33,13 +33,13 @@ public class DoctorServiceImpl implements IDoctorService {
 		result.forEach(resultList :: add);
 		return resultList;
 	}
-	
+
 	//working
 	@Override
-	public Doctor addDoctor(Doctor dr) {
-		//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
-		if(dr == null) {
-			throw new DoctorException("Passed object can't be null");
+	public Doctor addDoctor(Doctor dr) throws DoctorException {
+		Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
+		if(findById.isPresent()) {
+			throw new DoctorException("Doctor object already exists with ID : " +dr.getDoctorId());
 		} else {
 			return docDao.save(dr);
 		}
@@ -47,76 +47,86 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	//working
 	@Override
-	public Doctor updateDoctorProfile(Doctor bean) {
+	public Doctor updateDoctorProfile(Doctor bean) throws DoctorException {
 		// TODO Auto-generated method stub
-		//Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
-		if(bean == null) {
-			throw new DoctorException("Passed object can't be null");
+		Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
+		if(!findById.isPresent()) {
+			throw new DoctorException("Doctor doesn't exist with ID : " +bean.getDoctorId());
 		} else {
 			return docDao.save(bean);
 		}
 	}
-	
-	
+
+
 	//working
 	@Override
-	public Doctor removeDoctor(Doctor doc) {
+	public Doctor removeDoctor(Doctor doc) throws DoctorException {
 		Doctor dr = doc;
-		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
-		if(doc == null) {
-			throw new DoctorException("The passed object can't be null");
+		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
+		if(!docdb.isPresent()) {
+			throw new DoctorException("Doctor with id : " +doc.getDoctorId() +"doesn't exist to delete");
 
 		} else {
 			docDao.deleteById(doc.getDoctorId());	
 		}
 		return dr;
 	}
-	
-	
-	//working
-	public Doctor getDoctor(Doctor doc) {
-		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
-			return docdb.get();
-		
-	}
-	
-	
-	//working
-		@Override
-		public List<Doctor> getDoctorList(String speciality) {
-			
-			Optional<Doctor> findById = docDao.findBySpeciality(speciality);
-			List<Doctor> doclist = new ArrayList<>();
-			if (findById.isPresent()) {
-				doclist.add(findById.get());
-			} else
-				throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
 
-			return doclist;
+
+	//working
+	public Doctor getDoctor(Doctor doc) throws DoctorException {
+		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
+		if(docdb.isPresent()) {
+			return docdb.get();
+		} else {
+			throw new DoctorException("Doctor with id : " +doc.getDoctorId() +"doesn't exist");
 		}
 
-	public boolean updateAvailability(int availabilityId) {
-		if(availabilityId > 0) {
-			//ad.setAvailabilityId(ad.getAvailabilityId());
-			ad.setDoctor(ad.getDoctor());
-			ad.setFromDate(ad.getFromDate());
-			ad.setToDate(ad.getToDate());
-			return true;		
+	}
+
+
+	//working
+	@Override
+	public List<Doctor> getDoctorList(String speciality) throws DoctorException {
+
+		Optional<Doctor> findById = docDao.findBySpeciality(speciality);
+		List<Doctor> doclist = new ArrayList<>();
+		if (findById.isPresent()) {
+			doclist.add(findById.get());
+		} else
+			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
+
+		return doclist;
+	}
+
+
+
+	//private AvailabilityDates ad;
+	//working
+	public boolean addAvailability(AvailabilityDates availDates) {
+		if(availDates != null) {
+			Optional<AvailabilityDates> findById = availDao.findById(availDates.getAvailabilityId());
+			if(! findById.isPresent()) {
+				//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId()) {
+				availDao.save(availDates);
+				return true;
+			}
+
+		}	
+		return false;
+	}
+
+	//AvailabilityDates availdates1;
+	public boolean updateAvailability(AvailabilityDates availDates) {
+		//if(availabilityId > 0) {
+		Optional<AvailabilityDates> findById = availDao.findById(availDates.getAvailabilityId());
+		if(findById.isPresent()) {
+			availDao.save(availDates);
+			return true;	
+
 		} else {
 			return false;
 		}
 	}
 
-
-	private AvailabilityDates ad;
-
-	public boolean addAvailability(AvailabilityDates availDates) {
-		//if(bean != null) {
-			//if(doctor.getDoctorId() ==  bean.getDoctor().getDoctorId()) {
-				availDao.save(availDates);
-				return true;
-		//}	
-		//return false;
-	}
-	
 }

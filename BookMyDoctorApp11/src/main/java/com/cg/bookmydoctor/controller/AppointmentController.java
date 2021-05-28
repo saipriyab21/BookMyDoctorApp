@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bookmydoctor.dto.Appointment;
@@ -39,7 +41,7 @@ public class AppointmentController {
 		return AppointmentService.getAllAppointments();
 	}
 	
-	//working, input for doc and patient it is taking null
+	//working
 	@PostMapping("/addAppointment")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
@@ -75,11 +77,9 @@ public class AppointmentController {
 		return AppointmentService.getAppointments(doc);
 	}
 	
-	@GetMapping("/DateBasedAppointments/{doc}")
-	public List<Appointment> getAppointments(@PathVariable("doc") LocalDate doc) {
-		
-		return AppointmentService.getAppointments(doc);
-		
+	@GetMapping("/DateBasedAppointments")
+	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentDate") LocalDate date) {
+		return AppointmentService.getAppointments(date);
 	}
 	
 }

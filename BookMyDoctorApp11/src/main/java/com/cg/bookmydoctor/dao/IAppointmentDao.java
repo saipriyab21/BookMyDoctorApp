@@ -13,7 +13,9 @@ import com.cg.bookmydoctor.dto.Doctor;
 
 public interface IAppointmentDao extends CrudRepository<Appointment, Integer>  {
 
-	Optional<Appointment> findByDate(Date localdate);
+	List<Appointment> findAllByAppointmentDate(LocalDate date);
+
+	//Optional<Appointment> findByDate(Date localdate);
 	
 	/*public List<Appointment> getAllAppointments();
 	public Appointment getAppointment(int appointmentId);

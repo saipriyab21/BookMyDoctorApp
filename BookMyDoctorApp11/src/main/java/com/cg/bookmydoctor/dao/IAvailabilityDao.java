@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface IAvailabilityDao  extends CrudRepository<Doctor,Integer> {
+public interface IAvailabilityDao  extends CrudRepository<AvailabilityDates,Integer> {
 
 	//void saveAvailabilityDates(AvailabilityDates bean);
 
-	void save(AvailabilityDates bean);
+	//void save(AvailabilityDates bean);
 
 	//void save(AvailabilityDates bean);
 
