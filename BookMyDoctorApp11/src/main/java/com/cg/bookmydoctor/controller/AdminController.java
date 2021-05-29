@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.bookmydoctor.dto.Admin;
 import com.cg.bookmydoctor.exception.AdminException;
-import com.cg.bookmydoctor.service.AdminServiceImpl;
+import com.cg.bookmydoctor.serviceImpl.AdminServiceImpl;
 
 @RestController
-@RequestMapping("/Admin")
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
 	AdminServiceImpl adminservice ;
 	
     //working
-   	@GetMapping("/viewAdmin/{adminId}")
+   	@GetMapping("/viewadmin/{adminId}")
 	@ExceptionHandler(AdminException.class)
 	public Admin viewAdmin(@PathVariable("adminId") Admin admin) {
 		return adminservice.viewAdmin(admin);
 	}
 
    	//working
-	@PostMapping("/addAdmin")
+	@PostMapping("/addadmin")
 	@ExceptionHandler(AdminException.class)
 	public Admin addAdmin(@RequestBody Admin admin) {
 		return adminservice.addAdmin(admin);
@@ -39,7 +39,7 @@ public class AdminController {
 
 	
 	//working
-	@PutMapping("/updateAdmin")
+	@PutMapping("/updateadmin")
 	@ExceptionHandler(AdminException.class)
 	public Admin updateAdmin(@RequestBody Admin admin) {
 		return adminservice.updateAdmin(admin);
@@ -47,7 +47,7 @@ public class AdminController {
 
 	
 	//working
-	@DeleteMapping("/removeAdmin")
+	@DeleteMapping("/removeadmin")
 	@ExceptionHandler(AdminException.class)
 	public Admin removeAdmin(@RequestBody Admin admin) {
 		return adminservice.removeAdmin(admin);

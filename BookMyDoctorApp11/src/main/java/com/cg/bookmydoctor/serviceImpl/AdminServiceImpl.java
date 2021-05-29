@@ -1,4 +1,4 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceImpl;
 
      
 import java.util.Optional; 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.service.IAdminService;
 import com.cg.bookmydoctor.dao.*;
 
 
@@ -39,7 +40,7 @@ public class AdminServiceImpl implements IAdminService {
 
 	@Override
 	public Admin viewAdmin(Admin admin) {
-		Optional<Admin> adminDb = this.adminDao.findById(admin.getAdminId());
+		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(adminDb.isPresent()) {
 			return adminDb.get();
 		}

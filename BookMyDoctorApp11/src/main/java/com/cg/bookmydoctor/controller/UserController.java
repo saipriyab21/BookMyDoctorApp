@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.User;
 import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.UserException;
-import com.cg.bookmydoctor.service.UserServiceImpl;
+import com.cg.bookmydoctor.serviceImpl.UserServiceImpl;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	UserServiceImpl userService ;
 
 	
 	//working
-	@PostMapping("/addUser")
+	@PostMapping("/adduser")
 	@ExceptionHandler(UserException.class)
 	public User addUser(@RequestBody User user) {
 		return userService.addUser(user);
@@ -29,7 +29,7 @@ public class UserController {
 
 	
 	//working
-	@PutMapping("/updateUser")
+	@PutMapping("/updateuser")
 	@ExceptionHandler(UserException.class)
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
@@ -37,7 +37,7 @@ public class UserController {
 
 	
 	//working
-	@DeleteMapping("/removeUser")
+	@DeleteMapping("/removeuser")
 	@ExceptionHandler(AdminException.class)
 	public User removeUser(@RequestBody User user) {
 		return userService.removeUser(user);

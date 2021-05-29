@@ -1,4 +1,4 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceImpl;
 
 
 
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.service.IDoctorService;
+import com.cg.bookmydoctor.constants.DoctorConstants;
 import com.cg.bookmydoctor.dao.*;
 
 
@@ -37,6 +39,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	//working
 	@Override
 	public Doctor addDoctor(Doctor dr) throws DoctorException {
+		validateDoctor(dr);
 		Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
 		if(findById.isPresent()) {
 			throw new DoctorException("Doctor object already exists with ID : " +dr.getDoctorId());
@@ -48,6 +51,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	//working
 	@Override
 	public Doctor updateDoctorProfile(Doctor bean) throws DoctorException {
+		validateDoctor(bean);
 		// TODO Auto-generated method stub
 		Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
 		if(!findById.isPresent()) {
@@ -79,7 +83,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		if(docdb.isPresent()) {
 			return docdb.get();
 		} else {
-			throw new DoctorException("Doctor with id : " +doc.getDoctorId() +"doesn't exist");
+			return null;
 		}
 
 	}
@@ -127,6 +131,33 @@ public class DoctorServiceImpl implements IDoctorService {
 		} else {
 			return false;
 		}
+	}
+
+
+	public boolean validateDoctor(Doctor doctor) throws DoctorException {
+
+		if(!doctor.getDoctorName().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
+			throw new DoctorException(DoctorConstants.NAME_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getEmail().matches("[A-Za-z0-9+_.-]+@(.+)$")) {
+			throw new DoctorException(DoctorConstants.EMAIL_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getHospitalName().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
+			throw new DoctorException(DoctorConstants.HOSPITALNAME_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getLocation().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
+			throw new DoctorException(DoctorConstants.LOCATION_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getMobileNo().matches("(0/91)?[7-9][0-9]{9}")) {
+			throw new DoctorException(DoctorConstants.MOBILE_NUMBER_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getPassword().matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$")) {
+			throw new DoctorException(DoctorConstants.PASSWORD_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getSpeciality().matches("([A-Za-z])|([a-zA-Z]+)")) {
+			throw new DoctorException(DoctorConstants.SPECIALITY_CANNOT_BE_EMPTY);
+		}
+		return true;
 	}
 
 }

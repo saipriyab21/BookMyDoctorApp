@@ -1,4 +1,4 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.service.IAppointmentService;
 import com.cg.bookmydoctor.dao.*;
 
 import java.time.LocalDate;

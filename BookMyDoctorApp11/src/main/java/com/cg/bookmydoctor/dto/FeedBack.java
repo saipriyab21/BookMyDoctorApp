@@ -1,18 +1,19 @@
 package com.cg.bookmydoctor.dto;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "FeedBack")
+@Table(name = "feedback")
 public class FeedBack {
 	
 	@Id
@@ -20,40 +21,65 @@ public class FeedBack {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int feedbackId;
 	
-	//@OneToOne(targetEntity = Patient.class, cascade = CascadeType.ALL)
 	@OneToOne
-	@JoinColumn(name = "patientId", referencedColumnName = "patientId")
+	@JoinColumn(name = "patientId",referencedColumnName = "patientId")
 	private Patient patient;
 	
-	//@OneToOne(targetEntity = Doctor.class, fetch = FetchType.EAGER)
 	@OneToOne
-	@JoinColumn(name = "doctorId", referencedColumnName = "doctorId")
+	@JoinColumn(name = "doctorId",referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
+	@Min(value = 1)
+	@Max(value = 300)
 	@Column(name="rating")
 	private int rating;
 	
+	@NotBlank
 	@Column(name="feedbackComment")
 	private String feedbackComment;
 	
-	public FeedBack() {}
-	
-	public FeedBack(int feedbackId, Doctor doctor, Patient patient, int rating, String feedbackComment) {
+	public FeedBack() {
+		}
+
+	public FeedBack(int feedbackId, Patient patient, Doctor doctor, int rating, String feedbackComment) {
 		super();
 		this.feedbackId = feedbackId;
-		this.doctor = doctor;
 		this.patient = patient;
+		this.doctor = doctor;
 		this.rating = rating;
 		this.feedbackComment = feedbackComment;
 	}
 
-	
 	public int getFeedbackId() {
 		return feedbackId;
 	}
 
 	public void setFeedbackId(int feedbackId) {
 		this.feedbackId = feedbackId;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public String getFeedbackComment() {
@@ -64,32 +90,11 @@ public class FeedBack {
 		this.feedbackComment = feedbackComment;
 	}
 
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-	public Doctor getDoctor() {
-		return doctor;
-	}
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	
-
 	@Override
 	public String toString() {
-		return "FeedBack [feedbackId=" + feedbackId + ", patient=" + patient + ", doctor=" + doctor + ", rating=" + rating
-				+ ", feedbackComment=" + feedbackComment + "]";
+		return "FeedBack [feedbackId=" + feedbackId + ", patient=" + patient + ", doctor=" + doctor + ", rating="
+				+ rating + ", feedbackComment=" + feedbackComment + "]";
 	}
 	
-	
-
 }
+	

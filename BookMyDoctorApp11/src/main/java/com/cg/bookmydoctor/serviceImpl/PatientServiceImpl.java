@@ -1,9 +1,10 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.PatientException;
+import com.cg.bookmydoctor.service.IPatientService;
 import com.cg.bookmydoctor.dao.IPatientDao;
 
 import java.time.LocalDate;
@@ -19,7 +20,11 @@ public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	private IPatientDao patientDao;
 	
+	@Autowired
+	private IAppointmentDao appointmentDao;
 	Appointment a;
+	
+	Patient patient = new Patient();
 
 	@Override
 	//working
@@ -48,25 +53,25 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	//working
 	public Patient removePatientDetails(Patient bean) {
-		Patient Patient1 = bean;
+		Patient patient = bean;
 		Optional<Patient> docdb = patientDao.findById(bean.getPatientId());
 		if(docdb.isPresent()) {
 			patientDao.delete(bean);	
 		} else {
 			throw new PatientException("The passed object can't be null");
 		}
-		return Patient1;
+		return patient;
 	}
 	
 	@Override
 	//working
 	public Patient getPatient(Patient patient) {
-		Optional<Patient> patientDb = this.patientDao.findById(patient.getPatientId());
+		Optional<Patient> patientDb = patientDao.findById(patient.getPatientId());
 		if(patientDb.isPresent()) {
 			return patientDb.get();
 		}
 		else {
-			throw new PatientException("Record not found with id : " + patient.getPatientId());
+			return null;
 		}
 	}
 	
@@ -82,8 +87,13 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	public List<Patient> getPatientListByDoctor(Doctor doctor){
 		List<Patient> pat = new ArrayList<>();
-		if(a.getDoctor().getDoctorName().equals(doctor.getDoctorName())) {
-			pat.add(a.getPatient());
+		Optional<Appointment> optdocAppt = appointmentDao.findById(doctor.getDoctorId());
+		Optional<Appointment> optpatientAppt = appointmentDao.findById(patient.getPatientId());
+		//Iterable<Patient> optPatient = patientDao.findAll();
+		List<Patient> patientList = new ArrayList<>();
+		patientList.addAll(getAllPatient());
+		if(optdocAppt.isPresent() && optpatientAppt.isPresent()) {
+			pat.add(patient);
 		}
 		return pat;
 	}

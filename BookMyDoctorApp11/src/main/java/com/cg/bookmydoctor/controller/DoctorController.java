@@ -17,38 +17,38 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.DoctorException;
-import com.cg.bookmydoctor.service.DoctorServiceImpl;
+import com.cg.bookmydoctor.serviceImpl.DoctorServiceImpl;
 
 
 //@CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/Doctor")
+@RequestMapping("/doctor")
 public class DoctorController {
 	@Autowired(required = true)
 	DoctorServiceImpl doctorService;
 
 	//working
-	@PostMapping("/addDoctor")
+	@PostMapping("/adddoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor addDoctor(@RequestBody Doctor doctor) {
 		return doctorService.addDoctor(doctor);
 	}
 
 	//working
-	@GetMapping("/allDoctors")
+	@GetMapping("/alldoctors")
 	public List<Doctor> getDoctorList() {
 		return doctorService.getDoctorList();
 	}
 
 	//working
-	@DeleteMapping("/removeDoctor")
+	@DeleteMapping("/removedoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor removeDoctor(@RequestBody Doctor doctor) {
 		return doctorService.removeDoctor(doctor);
 	}
 
 	//working
-	@PutMapping("/updateDoctor")
+	@PutMapping("/updatedoctor")
 	@ExceptionHandler(DoctorException.class)
 	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) {
 		return doctorService.updateDoctorProfile(doctor);
@@ -56,28 +56,28 @@ public class DoctorController {
 
 	
 	//working
-	@GetMapping("/getDoctor/{doctorId}")
+	@GetMapping("/getdoctor/{doctorId}")
 	//@ExceptionHandler(DoctorException.class)
 	public Doctor getDoctor(@PathVariable("doctorId") Doctor doc) {
 		return doctorService.getDoctor(doc);
 	}
 	
 	//working
-	@GetMapping("/allDoctors/{speciality}")
+	@GetMapping("/alldoctors/{speciality}")
 	@ExceptionHandler(DoctorException.class)
 	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) {
 		return doctorService.getDoctorList(speciality);
 	}
 	
 	//working
-	@PostMapping("/addAvailability")
+	@PostMapping("/addavailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
 
 	
 	//working
-	@PutMapping("/updateAvailability")
+	@PutMapping("/updateavailability")
 	public boolean updateAvailability(@RequestBody AvailabilityDates availDates) {
 		return doctorService.updateAvailability(availDates);
 	}

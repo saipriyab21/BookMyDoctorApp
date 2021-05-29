@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-@Table(name = "Appointments")
+@Table(name = "Appointment")
 public class Appointment {
 	
 	@Id
@@ -21,43 +24,37 @@ public class Appointment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int appointmentId;
 	
-	@OneToOne//(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "doctorId",referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
-	@OneToOne//(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "patientId",referencedColumnName = "patientId")
 	private Patient patient;
 	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name="appointment_Date")
 	private LocalDate appointmentDate;
 	
+	@NotBlank
 	@Column(name="appointment_Status")
-	private String appointmentStatus;//approved ,cancelled,completed	
+	private String appointmentStatus;//approved ,cancelled,completed
 	
-	
-	@Column(name = "remark")
+	@NotBlank
+	@Column(name="remark")
 	private String remark;
 	
 	
 	public Appointment() {}
 
-	public Appointment(int appointmentId, Doctor doctor, Patient patient, String remark,LocalDate appointmentDate,
-			String appointmentStatus) {
+	public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDate appointmentDate,
+			String appointmentStatus, String remark) {
 		super();
 		this.appointmentId = appointmentId;
 		this.doctor = doctor;
 		this.patient = patient;
-		this.remark = remark;
 		this.appointmentDate = appointmentDate;
 		this.appointmentStatus = appointmentStatus;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
@@ -100,13 +97,21 @@ public class Appointment {
 	public void setAppointmentStatus(String appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
 	}
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	@Override
 	public String toString() {
 		return "Appointment [appointmentId=" + appointmentId + ", doctor=" + doctor + ", patient=" + patient
 				+ ", appointmentDate=" + appointmentDate + ", appointmentStatus=" + appointmentStatus + ", remark="
 				+ remark + "]";
-	}	
+	}
 	
 	
 }

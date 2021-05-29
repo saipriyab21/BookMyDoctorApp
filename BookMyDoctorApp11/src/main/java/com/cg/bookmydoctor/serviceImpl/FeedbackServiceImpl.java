@@ -1,5 +1,7 @@
-package com.cg.bookmydoctor.service;
-import java.util.ArrayList; 
+package com.cg.bookmydoctor.serviceImpl;
+
+
+import java.util.ArrayList;  
 import java.util.List;  
 import java.util.Optional;
 

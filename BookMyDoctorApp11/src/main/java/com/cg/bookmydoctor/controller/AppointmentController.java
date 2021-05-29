@@ -25,31 +25,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
-import com.cg.bookmydoctor.service.AppointmentServiceImpl;
+import com.cg.bookmydoctor.serviceImpl.AppointmentServiceImpl;
 
 
 //@CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/Appointments")
+@RequestMapping("/appointments")
 public class AppointmentController {
 	@Autowired(required = true)
 	AppointmentServiceImpl AppointmentService;
 
 	//working
-	@GetMapping("/AllAppointments")
+	@GetMapping("/allappointments")
 	public List<Appointment> getAllAppointments() {
 		return AppointmentService.getAllAppointments();
 	}
 	
 	//working
-	@PostMapping("/addAppointment")
+	@PostMapping("/addappointment")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
 		return AppointmentService.addAppointment(app);
 	}
 	
 	//working
-	@GetMapping("/getAppointment/{id}")
+	@GetMapping("/getappointment/{id}")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment getAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.getAppointment(AppointmentId);
@@ -57,7 +57,7 @@ public class AppointmentController {
 
 	
 	//working
-	@DeleteMapping("/deleteAppointment/{id}")
+	@DeleteMapping("/deleteappointment/{id}")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean deleteAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.deleteAppointment(AppointmentId);
@@ -65,19 +65,19 @@ public class AppointmentController {
 	
 	
 	//working
-	@PutMapping("/updateAppointment")
+	@PutMapping("/updateappointment")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean updateAppointment(@RequestBody Appointment bean) {
 		return AppointmentService.updateAppointment(bean);
 	}
 	
 	
-	@GetMapping("/DoctorBasedAppointments/{id}")
+	@GetMapping("/doctorbasedappointments/{id}")
 	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
 		return AppointmentService.getAppointments(doc);
 	}
 	
-	@GetMapping("/DateBasedAppointments")
+	@GetMapping("/datebasedappointments")
 	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentDate") LocalDate date) {
 		return AppointmentService.getAppointments(date);
 	}

@@ -21,11 +21,11 @@ import com.cg.bookmydoctor.dao.IDoctorDao;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.FeedBack;
 import com.cg.bookmydoctor.exception.FeedBackException;
-import com.cg.bookmydoctor.service.FeedbackServiceImpl;
+import com.cg.bookmydoctor.serviceImpl.FeedbackServiceImpl;
 
 //@CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/Feedback")
+@RequestMapping("/feedback")
 public class FeedBackController {
 	
 	IDoctorDao docDao;
@@ -33,7 +33,7 @@ public class FeedBackController {
 	FeedbackServiceImpl feedbackService;
 
 
-	@RequestMapping("/allFeedbackofDoctor/{doctorId}")
+	@RequestMapping("/allfeedbackofdoctor/{doctorId}")
 	@ExceptionHandler(FeedBackException.class)
 	public List<FeedBack> getAllFeedBack(@PathVariable("doctorId")Doctor doc) {
 		//Optional<Doctor> docDb = docDao.findById(doctorId);
@@ -42,14 +42,14 @@ public class FeedBackController {
 	}
 
 	//working
-	@PostMapping("/addFeedBack")
+	@PostMapping("/addfeedback")
 	@ExceptionHandler(FeedBackException.class)
 	public FeedBack addFeedback(@RequestBody FeedBack fdb) {
 		return feedbackService.addFeedback(fdb);
 	}
 
 	//working
-	@GetMapping("/getFeedBack/{ratingId}")
+	@GetMapping("/getfeedback/{ratingId}")
 	@ExceptionHandler(FeedBackException.class)
 	public FeedBack getFeedback(@PathVariable("ratingId") FeedBack fdb) {
 		return feedbackService.getFeedback(fdb);
