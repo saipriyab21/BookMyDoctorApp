@@ -55,4 +55,5 @@ public class FeedbackServiceImpl implements IFeedbackService {
 		}
 		return list;
 	}
+	//select * from feedback 
 }

@@ -82,6 +82,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			}
 			return appt;
 		}
+		//check doctor id is existing if not throw exceptio invalid dr id
 
 
 		@Override

@@ -39,7 +39,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	//working
 	@Override
 	public Doctor addDoctor(Doctor dr) throws DoctorException {
-		validateDoctor(dr);
+		//validateDoctor(dr);
 		Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
 		if(findById.isPresent()) {
 			throw new DoctorException("Doctor object already exists with ID : " +dr.getDoctorId());
@@ -51,7 +51,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	//working
 	@Override
 	public Doctor updateDoctorProfile(Doctor bean) throws DoctorException {
-		validateDoctor(bean);
+		//validateDoctor(bean);
 		// TODO Auto-generated method stub
 		Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
 		if(!findById.isPresent()) {
@@ -107,6 +107,7 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	//private AvailabilityDates ad;
 	//working
+	@Override
 	public boolean addAvailability(AvailabilityDates availDates) {
 		if(availDates != null) {
 			Optional<AvailabilityDates> findById = availDao.findById(availDates.getAvailabilityId());
@@ -121,6 +122,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 
 	//AvailabilityDates availdates1;
+	@Override
 	public boolean updateAvailability(AvailabilityDates availDates) {
 		//if(availabilityId > 0) {
 		Optional<AvailabilityDates> findById = availDao.findById(availDates.getAvailabilityId());
@@ -133,7 +135,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 	}
 
-
+/*
 	public boolean validateDoctor(Doctor doctor) throws DoctorException {
 
 		if(!doctor.getDoctorName().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
@@ -145,7 +147,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		if(!doctor.getHospitalName().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
 			throw new DoctorException(DoctorConstants.HOSPITALNAME_CANNOT_BE_EMPTY);
 		}
-		if(!doctor.getLocation().matches("([A-Za-z])|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
+		if(!doctor.getLocation().matches("([A-Za-z])+|([a-zA-Z]+[ ]{1}[a-zA-Z]+)")) {
 			throw new DoctorException(DoctorConstants.LOCATION_CANNOT_BE_EMPTY);
 		}
 		if(!doctor.getMobileNo().matches("(0/91)?[7-9][0-9]{9}")) {
@@ -158,6 +160,6 @@ public class DoctorServiceImpl implements IDoctorService {
 			throw new DoctorException(DoctorConstants.SPECIALITY_CANNOT_BE_EMPTY);
 		}
 		return true;
-	}
+	}*/
 
 }

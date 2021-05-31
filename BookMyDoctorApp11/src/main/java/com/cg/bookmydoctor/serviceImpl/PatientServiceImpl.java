@@ -86,7 +86,7 @@ public class PatientServiceImpl implements IPatientService {
 	
 	@Override
 	public List<Patient> getPatientListByDoctor(Doctor doctor){
-		List<Patient> pat = new ArrayList<>();
+		/*List<Patient> pat = new ArrayList<>();
 		Optional<Appointment> optdocAppt = appointmentDao.findById(doctor.getDoctorId());
 		Optional<Appointment> optpatientAppt = appointmentDao.findById(patient.getPatientId());
 		//Iterable<Patient> optPatient = patientDao.findAll();
@@ -95,7 +95,9 @@ public class PatientServiceImpl implements IPatientService {
 		if(optdocAppt.isPresent() && optpatientAppt.isPresent()) {
 			pat.add(patient);
 		}
-		return pat;
+		return pat;*/
+		return null;
+		
 	}
 	
 	@Override
