@@ -1,15 +1,18 @@
 package com.cg.bookmydoctor.tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals; 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any; 
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,18 @@ public class DoctorApplicationTesting extends BookMyDoctorAppApplicationTests {
 
 	@Autowired
 	private IDoctorDao docDao;
+	
+	@Before
+	public void setUp() {
+		docservice = new DoctorServiceImpl();
+		List<Doctor> docList  = new ArrayList<Doctor>();
+		Doctor doctor = new Doctor(1,"K Priya", "Dental","Mumbai", "Mumbai Hospital","8787778866", "priyaeee@gmail.com","Joshi!123", 800);
+
+		Doctor doctor2 = new Doctor(2,"M Harhsitha", "ENT", "Agra Delhi", "Sunshine Hospital", "9000878787","harshitha@gmail.com", "Crafty21!", 800);
+		docList.add(doctor);
+		docList.add(doctor2);
+		
+	}
 
 	@Test
 	void testdoctorServiceImpl() {
@@ -74,6 +89,12 @@ public class DoctorApplicationTesting extends BookMyDoctorAppApplicationTests {
 		
 		List<Doctor> docList = docservice.getDoctorList();
 		assertNotNull(docList);
+	}
+	
+	
+	@After
+	public void setDown() {
+		docservice = null;
 	}
 }
 
